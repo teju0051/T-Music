@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PL/SQL Practicals</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .card h2 {
+      margin-top: 0;
+      font-size: 20px;
+    }
+    pre {
+      background: #f0f0f0;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #4f46e5;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .copy-btn:hover {
+      background: #3730a3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- Question Template -->
+    <div class="card">
+      <h2>Q1 → Addition of 2 numbers</h2>
+      <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+      <pre>
+SET SERVEROUTPUT ON;
+DECLARE
+  a NUMBER := 5;
+  b NUMBER := 3;
+  c NUMBER;
+BEGIN
+  c := a + b;
+  DBMS_OUTPUT.PUT_LINE('ADDITION IS : ' || c);
+END;
+/</pre>
+    </div>
+
+    <div class="card">
+      <h2>Q2 → Print number from 1 - 10</h2>
+      <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+      <pre>
+SET SERVEROUTPUT ON;
+
+BEGIN
+  FOR i IN 1..10 LOOP
+    DBMS_OUTPUT.PUT_LINE(i);
+  END LOOP;
+END;
+/</pre>
+    </div>
+
+    <div class="card">
+      <h2>Q3 → Indexed Table Example</h2>
+      <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+      <pre>
+SET SERVEROUTPUT ON;
+
+DECLARE
+  TYPE emp_array IS TABLE OF VARCHAR2(50) INDEX BY PLS_INTEGER;
+  employees emp_array;
+BEGIN
+  employees(1) := 'Jyoti';
+  employees(2) := 'Yasim';
+  employees(3) := 'Rachna';
+
+  DBMS_OUTPUT.PUT_LINE('employee_1: ' || employees(1));
+  DBMS_OUTPUT.PUT_LINE('employee_2: ' || employees(2));
+END;
+/</pre>
+    </div>
+
+    <div class="card">
+      <h2>Q4 → Record Example</h2>
+      <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+      <pre>
+SET SERVEROUTPUT ON;
+
+DECLARE
+  TYPE emp_record IS RECORD (
+    emp_id NUMBER,
+    emp_name VARCHAR2(50),
+    emp_salary NUMBER(10,2)
+  );
+  emp emp_record;
+
+BEGIN
+  emp.emp_id := 101;
+  emp.emp_name := 'Arjun';
+  emp.emp_salary := 55000;
+
+  DBMS_OUTPUT.PUT_LINE(
+    'Employee ID: ' || emp.emp_id ||
+    ', Name: ' || emp.emp_name ||
+    ', Salary: ' || emp.emp_salary
+  );
+END;
+/</pre>
+    </div>
+
+    <div class="card">
+      <h2>Q5 → Procedure Creation & Call</h2>
+      <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+      <pre>
+SET SERVEROUTPUT ON;
+
+-- Procedure creation
+CREATE OR REPLACE PROCEDURE greet_user IS
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Hello');
+END;
+/
+
+-- Calling the procedure
+BEGIN
+  greet_user;
+END;
+/</pre>
+    </div>
+
+    <div class="card">
+      <h2>Q6 → Function to Calculate Square</h2>
+      <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+      <pre>
+SET SERVEROUTPUT ON;
+
+-- Create the function
+CREATE OR REPLACE FUNCTION calculate_Square (num IN NUMBER)
+RETURN NUMBER IS
+  result NUMBER;
+BEGIN
+  result := num * num;
+  RETURN result;
+END;
+/
+
+-- Call the function in an anonymous block
+DECLARE
+  square_result NUMBER;
+BEGIN
+  square_result := calculate_Square(5);
+  DBMS_OUTPUT.PUT_LINE('Square is ' || square_result);
+END;
+/</pre>
+    </div>
+
+    <div class="card">
+      <h2>Q7 → Exception Handling (Divide by Zero)</h2>
+      <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+      <pre>
+SET SERVEROUTPUT ON;
+
+DECLARE 
+  num1 NUMBER := 10;
+  num2 NUMBER := 0;
+  result NUMBER;
+
+BEGIN
+  result := num1 / num2;
+  DBMS_OUTPUT.PUT_LINE('Result: ' || result);
+
+EXCEPTION
+  WHEN ZERO_DIVIDE THEN
+    DBMS_OUTPUT.PUT_LINE('ERROR: CAN''T DIVIDE BY ZERO');
+END;
+/</pre>
+    </div>
+
+  </div>
+
+  <script>
+    function copyToClipboard(btn) {
+      const code = btn.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        btn.textContent = "Copied!";
+        setTimeout(() => {
+          btn.textContent = "Copy";
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
