@@ -1,20 +1,513 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Domain Available </title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scala Practical Exercises</title>
+<style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f3f4f6;
-      margin: 0;
-      padding: 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        margin: 0;
+        padding: 20px;
     }
-
-  </style>
+    h1 {
+        text-align: center;
+        color: #2c3e50;
+    }
+    .practical {
+        background: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px auto;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        max-width: 900px;
+    }
+    h2 {
+        color: #16a085;
+    }
+    pre {
+        background: #2d2d2d;
+        color: #f8f8f2;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        position: relative;
+    }
+    button.copy-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #16a085;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    button.copy-btn:hover {
+        background: #13846a;
+    }
+    .lib {
+        font-style: italic;
+        color: #555;
+        margin-top: 10px;
+    }
+</style>
 </head>
 <body>
-<h1>This site is avaliable for rent, for owning this please contact us at zentechindiaofficial@proton.me</h1>
+
+<h1>Scala Practical Exercises (1-10)</h1>
+
+<div id="practicals">
+
+<!-- Practical Template -->
+<div class="practical">
+    <h2>Calculate mean, median, and mode of a list of numbers. Implement basic statistical calculations using Scala collections.</h2>
+    <pre><button class="copy-btn">Copy</button>
+      
+   object BasicStats extends App {
+  val numbers = List(4, 2, 8, 6, 2, 4, 2, 8)
+
+  // Mean
+  val mean = numbers.sum.toDouble / numbers.size
+
+  // Median
+  val sorted = numbers.sorted
+  val median = if (sorted.size % 2 == 1)
+    sorted(sorted.size / 2)
+  else
+    (sorted(sorted.size / 2 - 1) + sorted(sorted.size / 2)).toDouble / 2
+
+  // Mode
+  val grouped = numbers.groupBy(identity).mapValues(_.size)
+  val maxFreq = grouped.values.max
+  val mode = grouped.filter(_._2 == maxFreq).keys.toList
+
+  // Display
+  println(s"Numbers: $numbers")
+  println(f"Mean: $mean%.2f")
+  println(s"Median: $median")
+  println(s"Mode: $mode")
+}
+
+
+    </pre>
+</div>
+
+<div class="practical">
+    <h2>Generate a random dataset of 10 numbers and calculate its variance and standard deviation. </h2>
+    <pre><button class="copy-btn">Copy</button>
+      
+      import scala.util.Random
+import scala.math.sqrt
+
+object VarianceStdDev extends App {
+  // Generate random dataset of 10 numbers (1 to 100)
+  val data = List.fill(10)(Random.nextInt(100) + 1)
+
+  // Mean
+  val mean = data.sum.toDouble / data.size
+
+  // Variance
+  val variance = data.map(x => math.pow(x - mean, 2)).sum / data.size
+
+  // Standard Deviation
+  val stdDev = sqrt(variance)
+
+  // Display Results
+  println(s"Dataset: $data")
+  println(f"Mean: $mean%.2f")
+  println(f"Variance: $variance%.2f")
+  println(f"Standard Deviation: $stdDev%.2f")
+}
+
+
+    </pre>
+</div>
+
+<div class="practical">
+    <h2>Create a dense vector using Breeze and calculate its sum, mean, and dot product with another vector. </h2>
+    <pre><button class="copy-btn">Copy</button>
+  import breeze.linalg._
+import breeze.stats._
+
+object BreezeVectorExample extends App {
+  // Create Dense Vectors
+  val v1 = DenseVector(1.0, 2.0, 3.0, 4.0, 5.0)
+  val v2 = DenseVector(5.0, 4.0, 3.0, 2.0, 1.0)
+
+  // Sum and Mean
+  val sumV1 = sum(v1)
+  val meanV1 = mean(v1)
+
+  // Dot Product
+  val dotProduct = v1 dot v2
+
+  // Display Results
+  println(s"Vector v1: $v1")
+  println(s"Vector v2: $v2")
+  println(s"Sum of v1: $sumV1")
+  println(f"Mean of v1: $meanV1%.2f")
+  println(s"Dot Product (v1 · v2): $dotProduct")
+}
+
+
+
+    </pre>
+    <div class="lib">Libraries: libraryDependencies ++= Seq(
+      "org.scalanlp" %% "breeze" % "2.1.0",
+      "com.github.tototoshi" %% "scala-csv" % "1.3.10"
+    )
+  )/div>
+</div>
+
+<div class="practical">
+    <h2>Generate a random matrix using Breeze and compute its transpose and determinant. </h2>
+    <pre><button class="copy-btn">Copy</button>
+   import breeze.linalg._
+import breeze.stats.distributions.Rand
+
+object BreezeMatrixExample extends App {
+  // Generate a 3x3 random matrix with values between 0 and 1
+  val matrix = DenseMatrix.rand[Double](3, 3, Rand.uniform)
+
+  // Transpose of the matrix
+  val transposed = matrix.t
+
+  // Determinant of the matrix
+  val determinant = det(matrix)
+
+  // Display Results
+  println(s"Matrix:\n$matrix\n")
+  println(s"Transpose:\n$transposed\n")
+  println(f"Determinant: $determinant%.4f")
+}
+
+
+    </pre>
+    <div class="lib">Libraries: lib: libraryDependencies ++= Seq(
+      "org.scalanlp" %% "breeze" % "2.1.0",
+      "com.github.tototoshi" %% "scala-csv" % "1.3.10"
+    )
+  )
+</div>
+</div>
+
+<div class="practical">
+    <h2>Slice a Breeze matrix to extract a sub-matrix and calculate its row and column sums. </h2>
+    <pre><button class="copy-btn">Copy</button>
+    import breeze.linalg._
+
+object BreezeMatrixSliceExample extends App {
+  // Create a 4x4 matrix
+  val matrix = DenseMatrix(
+    (1.0, 2.0, 3.0, 4.0),
+    (5.0, 6.0, 7.0, 8.0),
+    (9.0, 10.0, 11.0, 12.0),
+    (13.0, 14.0, 15.0, 16.0)
+  )
+
+  // Slice sub-matrix (e.g., rows 1 to 2 and cols 1 to 3)
+  val subMatrix = matrix(1 to 2, 1 to 3)
+
+  // Row sums and column sums
+  val rowSums = sum(subMatrix(*, ::))     // sum across rows
+  val colSums = sum(subMatrix(::, *))     // sum across columns
+
+  // Display results
+  println(s"Original Matrix:\n$matrix\n")
+  println(s"Sub-Matrix (rows 1–2, cols 1–3):\n$subMatrix\n")
+  println(s"Row Sums: $rowSums")
+  println(s"Column Sums: $colSums")
+}
+
+    </pre>
+    <div class="lib">Libraries:libraryDependencies ++= Seq(
+      "org.scalanlp" %% "breeze" % "2.1.0",
+      "com.github.tototoshi" %% "scala-csv" % "1.3.10"
+    )
+  )
+</div>
+</div>
+
+<div class="practical">
+    <h2>Sort a dataset by a specific column and extract the top 5 rows. </h2>
+    <pre><button class="copy-btn">Copy</button>import breeze.linalg._
+import breeze.stats._
+
+object BreezeSortExample extends App {
+  // Create a dataset: Each row = [ID, Score1, Score2]
+  val data = DenseMatrix(
+    (1.0, 78.0, 85.0),
+    (2.0, 92.0, 88.0),
+    (3.0, 67.0, 73.0),
+    (4.0, 89.0, 90.0),
+    (5.0, 76.0, 81.0),
+    (6.0, 95.0, 92.0),
+    (7.0, 84.0, 86.0),
+    (8.0, 90.0, 91.0)
+  )
+
+  // Sort by second column (Score1) in descending order
+  val sortedIndices = argsort(data(::, 1)).reverse
+  val sortedData = data(sortedIndices, ::).toDenseMatrix
+
+  // Extract top 5 rows
+  val top5 = sortedData(0 until 5, ::)
+
+  // Display results
+  println(s"Original Data:\n$data\n")
+  println(s"Sorted by Column 2 (Score1 Descending):\n$sortedData\n")
+  println(s"Top 5 Rows:\n$top5")
+}
+
+    </pre>
+    <div class="lib">Libraries: lib: libraryDependencies ++= Seq(
+      "org.scalanlp" %% "breeze" % "2.1.0",
+      "com.github.tototoshi" %% "scala-csv" % "1.3.10"
+    )
+  )</div>
+</div>
+
+<div class="practical">
+    <h2>Perform logistic regression using Breeze. Classify a dataset with binary    labels. </h2>
+    <pre><button class="copy-btn">Copy</button>
+import breeze.linalg._
+import breeze.numerics._
+import breeze.stats.distributions._
+
+object LogisticRegressionExample extends App {
+
+  // Step 1: Create dataset
+  // Each row = [Feature1, Feature2]
+  val X = DenseMatrix(
+    (1.0, 2.0),
+    (2.0, 1.0),
+    (2.0, 3.0),
+    (3.0, 2.0),
+    (4.0, 4.0),
+    (5.0, 3.0)
+  )
+
+  // Labels: 0 = Class A, 1 = Class B
+  val y = DenseVector(0.0, 0.0, 0.0, 1.0, 1.0, 1.0)
+
+  // Step 2: Add intercept term (column of 1s)
+  val ones = DenseMatrix.ones[Double](X.rows, 1)
+  val Xb = DenseMatrix.horzcat(ones, X)
+
+  // Step 3: Initialize weights randomly
+  var weights = DenseVector.rand[Double](Xb.cols, Rand.uniform)
+
+  // Step 4: Training parameters
+  val learningRate = 0.1
+  val iterations = 1000
+
+  // Step 5: Training loop (Gradient Descent)
+  for (_ <- 0 until iterations) {
+    val z = Xb * weights
+    val predictions = 1.0 /:/ (exp(-z) + 1.0)  // sigmoid(z)
+    val error = y - predictions
+    val gradient = Xb.t * error / Xb.rows.toDouble
+    weights += learningRate * gradient
+  }
+
+  // Step 6: Test predictions
+  val probs = 1.0 /:/ (exp(-(Xb * weights)) + 1.0)
+  val predictions = probs.map(p => if (p >= 0.5) 1.0 else 0.0)
+
+  // Step 7: Display results
+  println(s"Trained Weights: $weights\n")
+  println(s"Predicted Probabilities: $probs")
+  println(s"Predicted Labels: $predictions")
+  println(s"Actual Labels: $y")
+}
+
+
+    </pre>
+    <div class="lib">Libraries: lib: libraryDependencies ++= Seq(
+      "org.scalanlp" %% "breeze" % "2.1.0",
+      "com.github.tototoshi" %% "scala-csv" % "1.3.10"
+    )
+  )
+</div>
+</div>
+
+<div class="practical">
+    <h2>Cluster a dataset into two groups using k-means clustering in Breeze. </h2>
+    <pre><button class="copy-btn">Copy</button>
+
+import breeze.linalg._
+import scala.util.Random
+
+object KMeansClustering {
+  def main(args: Array[String]): Unit = {
+    // Sample dataset: 2D points
+    val data = Seq(
+      DenseVector(1.0, 2.0),
+      DenseVector(1.5, 1.8),
+      DenseVector(5.0, 8.0),
+      DenseVector(6.0, 9.0),
+      DenseVector(1.2, 0.9),
+      DenseVector(5.5, 8.5)
+    )
+
+    val k = 2 // Number of clusters
+    val maxIterations = 100
+
+    // Initialize cluster centers randomly and make mutable
+    val centroids = Random.shuffle(data).take(k).toArray
+
+    val assignments = Array.fill(data.length)(-1)
+    var changed = true
+    var iter = 0
+
+    while (changed && iter < maxIterations) {
+      changed = false
+      iter += 1
+
+      // Step 1: Assign each point to the nearest centroid
+      for (i <- data.indices) {
+        val distances = centroids.map(c => norm(data(i) - c))
+        val nearest = distances.zipWithIndex.minBy(_._1)._2
+        if (assignments(i) != nearest) {
+          assignments(i) = nearest
+          changed = true
+        }
+      }
+
+      // Step 2: Recalculate centroids
+      for (j <- 0 until k) {
+        val assignedPoints = data.zip(assignments).collect { case (p, cluster) if cluster == j => p }
+        if (assignedPoints.nonEmpty) {
+          // Update centroid
+          centroids(j) = assignedPoints.reduce(_ + _) /:/ assignedPoints.length.toDouble
+        }
+      }
+    }
+
+    // Print final cluster assignments
+    println(s"\nK-Means clustering completed in $iter iterations.\n")
+    data.zip(assignments).foreach { case (point, cluster) =>
+      println(f"Point: $point%-20s Cluster: $cluster")
+    }
+  }
+}
+
+
+    </pre>
+    <div class="lib">Libraries: libraryDependencies ++= Seq(
+      "org.scalanlp" %% "breeze" % "2.1.0",
+      "com.github.tototoshi" %% "scala-csv" % "1.3.10"
+    )
+  )
+</div>
+</div>
+
+<div class="practical">
+    <h2>Create a scatter plot of random data using Breeze-viz. Label the axes and customize the color of points.</h2>
+    <pre><button class="copy-btn">Copy</button>
+import breeze.linalg._
+import breeze.plot._
+import scala.util.Random
+
+object ScatterPlotExample extends App {
+
+  val n = 50
+  val x = DenseVector.fill(n){ Random.nextDouble() * 10 }
+  val y = DenseVector.fill(n){ Random.nextDouble() * 10 }
+
+  val fig = Figure("Random Scatter Plot")
+  val plt = fig.subplot(0)
+
+  // Scatter plot with fixed color and size
+  plt += scatter(x, y, _ => 0.02, _ => java.awt.Color.RED)
+
+  plt.xlabel = "X Axis"
+  plt.ylabel = "Y Axis"
+  plt.title = "Random Data Scatter Plot"
+
+  fig.refresh()
+}
+
+
+
+    </pre>
+    <div class="lib">Libraries: libraryDependencies ++= Seq(
+      "org.scalanlp" %% "breeze" % "2.1.0",
+  "org.scalanlp" %% "breeze-viz" % "2.1.0"  // for plotting
+)
+    )
+</div>
+</div>
+
+<div class="practical">
+    <h2>Generate a histogram of a dataset using Breeze-viz. Experiment with different bin sizes. </h2>
+    <pre><button class="copy-btn">Copy</button>
+     import breeze.linalg._
+import breeze.plot._
+import scala.util.Random
+
+object HistogramExample extends App {
+
+  // Step 1: Generate random dataset
+  val n = 1000
+  val data = DenseVector.fill(n){ Random.nextGaussian() * 2 + 5 } // mean=5, std=2
+
+  // Step 2: Create Figure
+  val fig = Figure("Histogram Example")
+  val plt = fig.subplot(0)
+
+  // Step 3: Plot histogram with 20 bins
+  val bins1 = 20
+  plt += hist(data, bins1)
+
+  plt.xlabel = "Value"
+  plt.ylabel = "Frequency"
+  plt.title = s"Histogram with $bins1 bins"
+
+  fig.refresh()
+
+  // Optional: Plot histogram with different bin sizes in another subplot
+  val plt2 = fig.subplot(2, 1, 1) // row 2, column 1, first subplot
+  plt2 += hist(data, 10)
+  plt2.xlabel = "Value"
+  plt2.ylabel = "Frequency"
+  plt2.title = "Histogram with 10 bins"
+  
+  val plt3 = fig.subplot(2, 1, 2) // second subplot
+  plt3 += hist(data, 50)
+  plt3.xlabel = "Value"
+  plt3.ylabel = "Frequency"
+  plt3.title = "Histogram with 50 bins"
+
+  fig.refresh()
+}
+
+
+    </pre>
+    <div class="lib">lib: libraryDependencies ++= Seq(
+      "org.scalanlp" %% "breeze" % "2.1.0",
+  "org.scalanlp" %% "breeze-viz" % "2.1.0"  // for plotting
+)
+    )</div>
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const code = btn.nextSibling.textContent;
+        navigator.clipboard.writeText(code).then(() => {
+            btn.textContent = 'Copied!';
+            setTimeout(() => btn.textContent = 'Copy', 1500);
+        });
+    });
+});
+</script>
+
 </body>
 </html>
