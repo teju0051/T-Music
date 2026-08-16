@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Snippets</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #0f172a;
+      color: #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      margin: 0;
+      box-sizing: border-box;
+      gap: 40px;
+    }
+
+    .code-container {
+      width: 100%;
+      max-width: 750px;
+      background-color: #1e293b;
+      border-radius: 10px;
+      border: 1px solid #334155;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 18px;
+      background-color: #0f172a;
+      border-bottom: 1px solid #334155;
+    }
+
+    .title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #94a3b8;
+      margin: 0;
+    }
+
+    .copy-btn {
+      background-color: #3b82f6;
+      color: #ffffff;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .copy-btn:hover {
+      background-color: #2563eb;
+    }
+
+    .copy-btn:active {
+      transform: scale(0.97);
+    }
+
+    .copy-btn.copied {
+      background-color: #10b981;
+    }
+
+    pre {
+      margin: 0;
+      padding: 18px;
+      overflow-x: auto;
+      background-color: #1e293b;
+      max-height: 500px;
+    }
+
+    code {
+      font-family: "Fira Code", Consolas, Monaco, "Courier New", Courier, monospace;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #38bdf8;
+      white-space: pre;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 1. CALCULATOR CODE BLOCK -->
+  <div class="code-container">
+    <div class="header">
+      <span class="title">Calculator</span>
+      <button class="copy-btn" onclick="copyCode('calcCode', this)">Copy Code</button>
+    </div>
+    <pre><code id="calcCode">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Servlet Calculator&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h2&gt;Simple Calculator&lt;/h2&gt;
+    
+    &lt;form action="calculate" method="post"&gt;
+        &lt;input type="number" name="num1" step="any" required placeholder="Enter first number"&gt;
+        &lt;br&gt;&lt;br&gt;
+        
+        &lt;input type="number" name="num2" step="any" required placeholder="Enter second number"&gt;
+        &lt;br&gt;&lt;br&gt;
+        
+        &lt;select name="operation"&gt;
+            &lt;option value="add"&gt;Addition (+)&lt;/option&gt;
+            &lt;option value="subtract"&gt;Subtraction (-)&lt;/option&gt;
+            &lt;option value="multiply"&gt;Multiplication (*)&lt;/option&gt;
+            &lt;option value="divide"&gt;Division (/)&lt;/option&gt;
+        &lt;/select&gt;
+        &lt;br&gt;&lt;br&gt;
+        
+        &lt;input type="submit" value="Calculate"&gt;
+    &lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+
+  <!-- 2. COOKIES AND SESSION CODE BLOCK -->
+  <div class="code-container">
+    <div class="header">
+      <span class="title">Cookies and Session</span>
+      <button class="copy-btn" onclick="copyCode('profileCode', this)">Copy Code</button>
+    </div>
+    <pre><code id="profileCode">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;title&gt;Profile&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;form method="post" action="profile"&gt;
+		&lt;table&gt;
+			&lt;tr&gt;
+				&lt;td&gt;Full Name&lt;/td&gt;
+				&lt;td&gt;&lt;input type='text' name='fullname'&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td&gt;Address&lt;/td&gt;
+				&lt;td&gt;&lt;textarea name='address' rows='2' cols='20'&gt;&lt;/textarea&gt;&lt;/td&gt; 
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td&gt;Contact no&lt;/td&gt;
+				&lt;td&gt;&lt;input type='text' name='phone'/&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td&gt;Email address&lt;/td&gt;
+				&lt;td&gt;&lt;input type='email' name='email'/&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td&gt;DoB&lt;/td&gt;
+				&lt;td&gt;&lt;input type='date' name='dob'/&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td&gt;Gender&lt;/td&gt;
+				&lt;td&gt;
+					&lt;input type='radio' name='gender' value="Male"/&gt; Male
+					&lt;input type='radio' name='gender' value='Female'/&gt; Female
+				&lt;/td&gt;
+			&lt;/tr&gt;			
+			&lt;tr&gt;
+				&lt;td&gt;Skills&lt;/td&gt;
+				&lt;td&gt;
+					&lt;input type='checkbox' name='skills' value='Java'/&gt; Java
+					&lt;input type='checkbox' name='skills' value='SAP'/&gt; SAP
+					&lt;input type='checkbox' name='skills' value='Mainframe'/&gt; Mainframe
+					&lt;input type='checkbox' name='skills' value='Python FSD'/&gt; Python Full Stack
+				&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td&gt;Preferred location&lt;/td&gt;
+				&lt;td&gt;
+&lt;input type='text' name='location' list='location'/&gt;			
+		&lt;datalist id='location'&gt;
+						&lt;option&gt;Bengaluru&lt;/option&gt;
+						&lt;option&gt;Chennai&lt;/option&gt;
+						&lt;option&gt;Delhi&lt;/option&gt;
+						&lt;option&gt;Hyderabad&lt;/option&gt;
+						&lt;option&gt;Pune&lt;/option&gt;
+					&lt;/datalist&gt;
+				&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td&gt;&lt;/td&gt;
+				&lt;td&gt;
+					&lt;input type='submit' value='Enter'/&gt;
+					&lt;input type='reset' value='Clear'/&gt;
+				&lt;/td&gt;
+			&lt;/tr&gt;
+		&lt;/table&gt;
+	&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+
+  <!-- 3. DISPATCHER CODE BLOCK -->
+  <div class="code-container">
+    <div class="header">
+      <span class="title">dispatcher & session management</span>
+      <button class="copy-btn" onclick="copyCode('dispatcherCode', this)">Copy Code</button>
+    </div>
+    <pre><code id="dispatcherCode">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;title&gt;Index&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;form method='post' action='dispatcher'&gt;
+		&lt;table&gt;
+			&lt;tr&gt;
+				&lt;td&gt;Username&lt;/td&gt;
+				&lt;td&gt;&lt;input type='text' name='username'/&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td&gt;Password&lt;/td&gt;
+				&lt;td&gt;&lt;input type='password' name='password'/&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td&gt;&lt;/td&gt;
+				&lt;td&gt;
+					&lt;input type='submit' value='Enter'/&gt;
+					&lt;input type='reset' value='Clear'/&gt;
+				&lt;/td&gt;
+			&lt;/tr&gt;
+		&lt;/table&gt;
+	&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+
+  <!-- 4. PROFILE CODE BLOCK -->
+  <div class="code-container">
+    <div class="header">
+      <span class="title">profile</span>
+      <button class="copy-btn" onclick="copyCode('profileFormCode', this)">Copy Code</button>
+    </div>
+    <pre><code id="profileFormCode">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Profile Form&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h2&gt;Profile Form&lt;/h2&gt;
+
+&lt;form action="ProfileServlet" method="post"&gt;
+
+    Full Name:
+    &lt;input type="text" name="fullname" required&gt;&lt;br&gt;&lt;br&gt;
+
+    Address:
+    &lt;textarea name="address" rows="3" cols="20"&gt;&lt;/textarea&gt;&lt;br&gt;&lt;br&gt;
+
+    Email:
+    &lt;input type="email" name="email" required&gt;&lt;br&gt;&lt;br&gt;
+
+    Phone:
+    &lt;input type="text" name="phone" required&gt;&lt;br&gt;&lt;br&gt;
+
+    Date of Birth:
+    &lt;input type="date" name="dob"&gt;&lt;br&gt;&lt;br&gt;
+
+    Gender:
+    &lt;input type="radio" name="gender" value="Male"&gt;Male
+    &lt;input type="radio" name="gender" value="Female"&gt;Female
+    &lt;input type="radio" name="gender" value="Other"&gt;Other
+    &lt;br&gt;&lt;br&gt;
+
+    Skills:
+    &lt;input type="checkbox" name="skills" value="Java"&gt;Java
+    &lt;input type="checkbox" name="skills" value="Python"&gt;Python
+    &lt;input type="checkbox" name="skills" value="HTML"&gt;HTML
+    &lt;input type="checkbox" name="skills" value="CSS"&gt;CSS
+    &lt;br&gt;&lt;br&gt;
+
+    Preferred Location:
+    &lt;select name="location"&gt;
+        &lt;option&gt;Mumbai&lt;/option&gt;
+        &lt;option&gt;Pune&lt;/option&gt;
+        &lt;option&gt;Delhi&lt;/option&gt;
+        &lt;option&gt;Bangalore&lt;/option&gt;
+        &lt;option&gt;Hyderabad&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;br&gt;&lt;br&gt;
+
+    &lt;input type="submit" value="Submit"&gt;
+
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+
+  <!-- JAVASCRIPT FOR COPY BUTTONS -->
+  <script>
+    function copyCode(elementId, button) {
+            const codeText = document.getElementById(elementId).innerText;
+
+            navigator.clipboard.writeText(codeText).then(() => {
+                const originalText = button.textContent;
+                button.textContent = "Copied!";
+                button.classList.add("copied");
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove("copied");
+                }, 2000);
+            }).catch(err => {
+                console.error("Failed to copy text: ", err);
+            });
+        }
+  </script>
+
+</body>
+
+</html>
